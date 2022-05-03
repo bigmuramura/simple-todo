@@ -4,6 +4,7 @@ go 1.18
 
 require (
 	github.com/bigmuramura/simple-todo/todo_app v0.0.0-20220503072511-7e0423f8e769
+	github.com/mattn/go-sqlite3 v1.14.12
 	gopkg.in/ini.v1 v1.66.4
 )
 

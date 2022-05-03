@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/bigmuramura/simple-todo/app/models"
 	"github.com/bigmuramura/simple-todo/todo_app/config"
 )
 
@@ -14,4 +15,6 @@ func main() {
 	fmt.Println(config.Config.LogFile)
 
 	log.Println("test")
+
+	fmt.Println(models.Db)
 }
