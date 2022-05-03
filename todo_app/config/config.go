@@ -3,6 +3,7 @@ package config
 import (
 	"log"
 
+	"github.com/bigmuramura/simple-todo/todo_app/utils"
 	"gopkg.in/ini.v1"
 )
 
@@ -19,6 +20,7 @@ var Config ConfigList
 // main関数より前にconfig.iniを読み込むためにinit関数を作成
 func init() {
 	LoadConfig()
+	utils.LoggingSettings(Config.LogFile)
 }
 
 func LoadConfig() {
