@@ -1,4 +1,4 @@
-name: staticcheck-action
+name: staticcheck
 on:
   push:
     tags:
