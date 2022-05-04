@@ -44,3 +44,13 @@ func GetUser(id int) (user User, err error) {
 	)
 	return user, err
 }
+
+// User型のメソッドを作成
+func (u *User) UpdateUser() (err error) {
+	cmd := `update users set name = ?, email = ? where id = ?`
+	_, err = Db.Exec(cmd, u.Name, u.Email, u.ID) // u.Name, u.Email, u.ID は?の箇所に代入される
+	if err != nil {
+		log.Fatalln(err)
+	}
+	return err
+}
