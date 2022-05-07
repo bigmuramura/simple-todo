@@ -1,14 +1,10 @@
 package main
 
-import (
-	"fmt"
-
-	"github.com/bigmuramura/simple-todo/app/controllers"
-	"github.com/bigmuramura/simple-todo/app/models"
-)
+import "github.com/bigmuramura/simple-todo/app/controllers"
 
 func main() {
-	fmt.Println(models.Db)
+	// fmt.Println(models.Db)
 
 	controllers.StartMainServer()
+
 }
