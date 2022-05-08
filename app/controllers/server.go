@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 
+	"github.com/bigmuramura/simple-todo/app/models"
 	"github.com/bigmuramura/simple-todo/config"
 )
 
@@ -22,6 +23,17 @@ func generateHTML(w http.ResponseWriter, date interface{}, filenames ...string) 
 	templates.ExecuteTemplate(w, "layout", date)
 }
 
+func session(w http.ResponseWriter, r *http.Request) (sess models.Session, err error) {
+	cookie, err := r.Cookie("_cookie")
+	if err != nil {
+		sess = models.Session{UUID: cookie.Value}
+		if ok, _ := sess.CheckSession(); !ok {
+			err = fmt.Errorf("invalid session") // 自分でエラーを作成する
+		}
+	}
+	return sess, err
+}
+
 func StartMainServer() error {
 	files := http.FileServer(http.Dir(config.Config.Static))
 	http.Handle("/static/", http.StripPrefix("/static/", files))
@@ -30,6 +42,7 @@ func StartMainServer() error {
 	http.HandleFunc("/signup", signup)
 	http.HandleFunc("/login", login)
 	http.HandleFunc("/authenticate", authenticate)
+	http.HandleFunc("/todos", index)
 
 	return http.ListenAndServe(":"+config.Config.Port, nil) // 第2引数の nil はマルチプレクサの指定で通常はデフォルトのマルチプレクサを使うため nil を指定する。登録されていないURLにアクセスされたら403を返す。
 }
